@@ -21,7 +21,7 @@ $precio->get('/{tipo}/lista', function ($tipo) use ($app) {
   $sql = "select pr.*, case pr.estado when 1 then 'Activo' else 'Inactivo' end estado_desc, p.producto_desc "
         ."from tc_precio pr "
         ."inner join tc_producto p on pr.producto_id = p.producto_id "
-        ."where pr.estado = 1 and pr.tipo_cliente_id = ?";
+        ."where pr.tipo_cliente_id = ?";
   $rows = $app['db']->fetchAll( $sql, array($tipo) );
   return $app->json( resultArray( 'OK', 'Datos cargados', $rows ) );
 });

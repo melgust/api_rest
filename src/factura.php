@@ -326,6 +326,22 @@ $factura->post('/add', function () use ($app) {
             'tipo_pago_id' => $itemsPago[$i]['tipo_pago_id'],
             'factura_id' => $identificador
           ));
+          if ($itemsPago[$i]['tipo_pago_id'] == 3) { //cheque
+            $app['db']->insert('tt_cheque', array(
+              'cheque_desc' => $itemsPago[$i]['nombre'],
+              'banco_id' => $itemsPago[$i]['banco_id'],
+              'monto' => $itemsPago[$i]['monto'],
+              'fecha_disponible' => $itemsPago[$i]['fecha_disponible'],
+              'url_documento' => $itemsPago[$i]['url_documento'],
+              'cuenta' => $itemsPago[$i]['cuenta'],
+              'numero' => $itemsPago[$i]['no_documento'],
+              'estado_id' => 1,
+              'usuario_modifica_id' => $data['usuario_id'],
+              'fecha_registro' => date('Y-m-d H:i:s'),
+              'factura_id' => $identificador,
+              'cliente_id' => $data['cliente_id']
+            ));
+          }
         }
         $respuesta = $app->json(resultArray('OK', 'Proceso completado con éxito', $identificador));
       } else {

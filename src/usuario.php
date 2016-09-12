@@ -15,7 +15,7 @@ $usuario->get('/caja/lista', function () use ($app) {
 $usuario->get('/menu/lista/{perfil_id}/perfil', function ($perfil_id) use ($app) {
   $sql = "SELECT m.menu_id, m.menu_desc, m.url, m.tooltip, m.icono, m.padre_id "
         ."FROM tc_menu m inner join tc_menu_perfil p on m.menu_id = p.menu_id "
-        ."where m.estado = 1 and p.perfil_id = ".$perfil_id;
+        ."where m.estado = 1 and p.perfil_id = ".$perfil_id." order by m.menu_desc";
   $row = $app['db']->fetchAll( $sql, array() );
   return $app->json( resultArray( 'OK', 'Datos cargados', $row ) );
 });

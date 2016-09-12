@@ -101,6 +101,9 @@ $app->mount('/bodega', include 'bodega.php');
 //cajas
 $app->mount('/caja', include 'caja.php');
 
+//cheque
+$app->mount('/cheque', include 'cheque.php');
+
 $app->error(function (\Exception $e, $code) use ($app) {
 
     if ($app['debug'] == false) {
